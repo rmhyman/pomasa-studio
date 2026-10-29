@@ -220,7 +220,7 @@ You are an independent argument verifier. Your task is to verify whether citatio
 ## Verification Content
 
 ### 1. Citation Accuracy
-- Whether data cited in analysis matches original materials
+- Use `scripts/check_quotes.py` to check whether data cited in analysis matches original materials
 - Whether there is cherry-picking
 - Whether key information like numbers and dates is accurate
 
