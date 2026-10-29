@@ -44,14 +44,17 @@ This pattern should be applied by default for all systems that include web resea
 ### Default Tool Priorities
 
 **Search Tools** (priority from high to low):
-1. `mcp__serper-search__google_search` - Google search via Serper API
-2. `WebSearch` - AI provider default (fallback)
+1. `donsetch_web_search` - local plugin, no per-call credits
+2. `web_search` - Deepseek Search API
+3. `mcp__crawl4ai__search` — Crawl4AI's multi-engine search; costs credits
+4. `mcp__serper-search__google_search` - Google search via Serper API 
 
 **Web Fetch Tools** (priority from high to low):
-1. `mcp__crawl4ai__read_url` - Free, good for most pages
-2. `mcp__oxylabs__universal_scraper` - Powerful, handles difficult pages
-3. `mcp__oxylabs__ai_scraper` - AI-powered extraction
-4. `WebFetch` - AI provider default (fallback)
+1. `donsetch_web_fetch` — local plugin, no per-call credits
+2. `web_fetch` (runtime default) — cheap fallback for plain HTML; Deepseek Fetch API
+3. `mcp__crawl4ai__scrape` — HTML and JavaScript pages
+4. `mcp__oxylabs__universal_scraper` - Powerful, handles difficult pages
+5. `mcp__oxylabs__ai_scraper` - AI-powered extraction
 
 ### Tool Selection Strategy
 
@@ -137,14 +140,18 @@ For tool priorities, see the "Tool Priorities" section below.
 ## Tool Priorities
 
 **Search Tools** (try in order):
-1. `mcp__serper-search__google_search`
-2. `WebSearch`
+1.`donsetch_web_search`
+2.`web_search`
+3.`mcp__crawl4ai__search`
+4.`mcp__serper-search__google_search`
 
 **Web Fetch Tools** (try in order):
-1. `mcp__crawl4ai__read_url`
-2. `mcp__oxylabs__universal_scraper`
-3. `mcp__oxylabs__ai_scraper`
-4. `WebFetch`
+1.`donsetch_web_fetch`
+2.`web_fetch`
+3.`mcp__crawl4ai__scrape`
+4.`mcp__oxylabs__universal_scraper`
+5.`mcp__oxylabs__ai_scraper`
+
 
 When a tool fails (error, timeout, or returns empty), try the next tool in the list.
 Only report failure when all tools have been exhausted.
@@ -170,7 +177,7 @@ Most users should leave this section empty or omit it entirely to use the defaul
 User input does not specify tool overrides. The system uses default priorities.
 
 Agent attempts to fetch a web page:
-1. Try `mcp__crawl4ai__read_url` → times out
+1. Try `mcp__crawl4ai__scrape` → times out
 2. Try `mcp__oxylabs__universal_scraper` → succeeds
 3. Return content
 
